@@ -51,6 +51,9 @@
   flex-direction: row;
 }
 
+.comment-form-buttons > button {
+  cursor: pointer;
+}
 .comment-cancel-button {
   background: #d8d8d8;
 }
