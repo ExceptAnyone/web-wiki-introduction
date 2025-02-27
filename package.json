@@ -1,0 +1,11 @@
+{
+  "devDependencies": {
+    "homepage": "https://exceptanyone.github.io/web-wiki-introduction",
+    "gh-pages": "^6.3.0"
+  },
+  "scripts": {
+    "build": "echo 'No build step needed for static HTML/CSS/JS'",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d ."
+  }
+}
