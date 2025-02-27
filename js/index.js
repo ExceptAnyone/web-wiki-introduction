@@ -29,36 +29,45 @@ const commentCancelButton = qs('.comment-cancel-button');
 const commentSubmitButton = qs('.comment-submit-button');
 
 function handleCommentFormSubmit(event) {
-  event.preventDefault();
+  try {
+    event.preventDefault();
 
-  const commentContent = commentInput.value;
-  if (!commentContent.trim()) return;
+    const commentContent = commentInput.value;
+    if (!commentContent.trim()) return;
 
-  const commentTemplate = `
-    <div class="comment-item">
-      <div class="comment-author">
-        <img
-          src="./images/comment-author-icon.png"
-          alt="사용자 프로필 이미지"
-        />
-        <span>방문자</span>
-      </div>
-      <div class="comment-content">
-        ${commentContent}
-      </div>
+    const commentTemplate = getCommentTemplate(commentContent);
+    const li = document.createElement('li');
+
+    commentList.appendChild(li);
+    li.innerHTML = commentTemplate;
+
+    alert('댓글이 등록되었습니다');
+    commentInput.value = '';
+  } catch (error) {
+    alert('댓글 입력에 실패하였습니다.');
+    console.error(error);
+  }
+}
+
+function getCommentTemplate(commentContent) {
+  return `
+  <div class="comment-item">
+    <div class="comment-author">
+      <img
+        src="./images/comment-author-icon.png"
+        alt="사용자 프로필 이미지"
+      />
+      <span>방문자</span>
     </div>
-  `;
-
-  const commentItem = document.createElement('li');
-  commentItem.innerHTML = commentTemplate;
-  commentList.appendChild(commentItem);
-
-  commentInput.value = '';
+    <div class="comment-content">
+      ${commentContent}
+    </div>
+  </div>
+`;
 }
 
 function handleCancelButtonClick() {
   commentInput.value = '';
-  console.log('cancel');
 }
 
 commentCancelButton.addEventListener('click', handleCancelButtonClick);
